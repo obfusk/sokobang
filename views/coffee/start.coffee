@@ -15,14 +15,13 @@ $ ->
 
   oops = -> alert 'We apologise for the inconvenience...'
   done = -> $play.prop 'disabled', false
-
   opts = canvas: $canvas[0], done: done
 
   for x in 'goal man man_goal object object_goal wall'.split(/\ +/)
     opts["#{x}_img"] = $("##{x}_img")[0]
 
-  start = (data) ->
-    $canvas.focus(); sokobang.start _.extend opts, level: data
+  start = (level) ->
+    $canvas.focus(); sokobang.start opts, level
 
   play = (set, level) ->
     $play.prop 'disabled', true
@@ -35,15 +34,15 @@ $ ->
     for i in [0..levels[n].levels-1]
       $levels.append $('<option>').val(i).text i+1
 
+  $sets.change set_levels
+  $play.click -> play $sets.val(), $levels.val()
+  $canvas.attr 'tabindex', 0
+
   $.get '/levels/levels.json'
     .done (data) ->
       levels = data
       $sets.append $('<option>').val(i).text(x.name) for x, i in levels
-      set_levels()
+      set_levels(); $play.click()
     .fail oops
-
-  $sets.change set_levels
-  $play.click -> play $sets.val(), $levels.val()
-  $canvas.attr 'tabindex', 0
 
 # vim: set tw=70 sw=2 sts=2 et fdm=marker :

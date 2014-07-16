@@ -33,7 +33,12 @@
 ## TODO
 []: {{{1
 
-  * build
+  * cancel level / choose another
+  * undo
+  * background images
+  * show level, #steps, #pushes, etc.
+  * improve render_end
+  * tell user how to play
   * specs/docs?
   * ...
 
