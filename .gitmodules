@@ -1,0 +1,3 @@
+[submodule "deps/bigbang.coffee"]
+	path = deps/bigbang.coffee
+	url = https://github.com/obfusk/bigbang.coffee.git
