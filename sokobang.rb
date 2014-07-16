@@ -17,7 +17,7 @@ class Sokobang < Sinatra::Base
 
   SCRIPTS = %w{
     /js/jquery.min.js
-    /js/underscore.min.js
+    /js/underscore-min.js
     /__coffee__/bigbang.js
     /__coffee__/sokobang.js
     /__coffee__/start.js
