@@ -1,0 +1,30 @@
+!!!
+%html
+  %head
+    %title Sokobang
+    %meta{ 'http-equiv' => 'Content-Type',
+           content: 'text/html;charset=utf-8' }
+    - SCRIPTS.each do |src|
+      %script{ type: 'text/javascript', src: src }
+    :css
+      body, html  { width: 100%; height: 100%; margin: 0px; }
+      #link       { text-align: center; padding: 10px; }
+      #images     { display: none; }
+      #CANVAS     { display: block; margin: 0px auto;
+                    border: 1px solid black; }
+  %body
+    #images
+    - # TODO {
+    \ - %w{ goo body }.each do |x|
+    \   %img{ id: "#{x}_img".upcase, src: "/img/#{x}.gif",
+    \         alt: 'IMG' }
+    \ - %w{ left up right down }.each do |x|
+    \   %img{ id: "head_#{x}_img".upcase, src: "/img/head_#{x}.gif",
+    \         alt: 'IMG' }
+    - # } TODO
+    #link
+      - url = 'https://github.com/obfusk/sokobang'
+      &= '-->'
+      %a{ href: url }&= url
+    #container
+      %canvas#CANVAS
