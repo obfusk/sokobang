@@ -1,0 +1,6 @@
+*~
+*.swp
+
+/doc
+/node_modules
+/src/*.js
