@@ -2,10 +2,10 @@
 #
 # File        : sokobang.rb
 # Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-# Date        : 2014-07-16
+# Date        : 2014-07-17
 #
 # Copyright   : Copyright (C) 2014  Felix C. Stegerman
-# Licence     : GPLv3+
+# Licence     : AGPLv3+
 #
 # --                                                            ; }}}1
 

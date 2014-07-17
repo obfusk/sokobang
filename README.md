@@ -2,10 +2,10 @@
 
     File        : README.md
     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-    Date        : 2014-07-16
+    Date        : 2014-07-17
 
     Copyright   : Copyright (C) 2014  Felix C. Stegerman
-    Version     : v0.1.0
+    Version     : v0.1.1
 
 []: }}}1
 
@@ -14,8 +14,8 @@
 
   sokobang - sokoban puzzle w/ bigbang.coffee
 
-  A sokoban puzzle (with images and levels from ksokoban [1]) written
-  in coffeescript using the bigbang.coffee [2] library.
+  A sokoban puzzle -- with images and levels from ksokoban [1] --
+  written in coffeescript using the bigbang.coffee [2] library.
 
   To run the game, you will need bigbang.coffee; when using git, use
   `git submodule update --init` to fetch and use the dependencies.
@@ -25,7 +25,7 @@
 ## Specs & Docs
 []: {{{1
 
-    $ rake spec
+    $ rake spec   # TODO
     $ rake docs
 
 []: }}}1
@@ -33,11 +33,9 @@
 ## TODO
 []: {{{1
 
-  * undo / reload level
-  * background images
-  * show level, #steps, #pushes, etc.
+  * fix slowness on large levels
+  * reload level
   * improve render_end
-  * tell user how to play
   * improve state handling in start.coffee
   * specs/docs?
   * ...
@@ -47,7 +45,7 @@
 ## License
 []: {{{1
 
-  GPLv3+ [3].
+  AGPLv3+ [3].
 
 []: }}}1
 
@@ -60,8 +58,8 @@
   [2] bigbang.coffee
   --- https://github.com/obfusk/bigbang.coffee
 
-  [3] GNU General Public License, version 3
-  --- http://www.gnu.org/licenses/gpl-3.0.html
+  [3] GNU Affero General Public License, version 3
+  --- http://www.gnu.org/licenses/agpl-3.0.html
 
 []: }}}1
 
