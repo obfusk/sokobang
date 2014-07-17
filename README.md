@@ -5,7 +5,7 @@
     Date        : 2014-07-16
 
     Copyright   : Copyright (C) 2014  Felix C. Stegerman
-    Version     : v0.0.1
+    Version     : v0.1.0
 
 []: }}}1
 
@@ -33,12 +33,12 @@
 ## TODO
 []: {{{1
 
-  * cancel level / choose another
-  * undo
+  * undo / reload level
   * background images
   * show level, #steps, #pushes, etc.
   * improve render_end
   * tell user how to play
+  * improve state handling in start.coffee
   * specs/docs?
   * ...
 

@@ -10,38 +10,40 @@
 # <!-- }}}1 -->
 
 $ ->
-  $sets   = $ '#sets'   ; $levels = $ '#levels' ; $play = $ '#play'
-  $canvas = $ '#CANVAS' ; levels  = null
+  $sets   = $ '#sets'   ; $levels = $ '#levels'; $play = $ '#play'
+  $canvas = $ '#CANVAS' ; levels  = quit = done = null
 
-  oops = -> alert 'We apologise for the inconvenience...'
-  done = -> $play.prop 'disabled', false
-  opts = canvas: $canvas[0], done: done
+  on_done = -> quit = null; done?()
+  oops    = -> alert 'We apologise for the inconvenience...'
+  opts    = canvas: $canvas[0], on_done: on_done
 
   for x in 'goal man man_goal object object_goal wall'.split(/\ +/)
     opts["#{x}_img"] = $("##{x}_img")[0]
 
   start = (level) ->
-    $canvas.focus(); sokobang.start opts, level
+    $canvas.focus(); done = null; quit = sokobang.start opts, level
 
   play = (set, level) ->
     $play.prop 'disabled', true
-    $.get "/levels/level_#{set}_#{level}.json"
-      .done (data) -> start data
-      .fail oops
+    done = ->
+      $.get "/levels/level_#{set}_#{level}.json"
+        .done (data) -> $play.prop 'disabled', false; start data
+        .fail oops
+    if quit then quit() else done()
 
   set_levels = ->
     n = parseInt $sets.val(); $levels.empty()
     for i in [0..levels[n].levels-1]
       $levels.append $('<option>').val(i).text i+1
-
-  $sets.change set_levels
-  $play.click -> play $sets.val(), $levels.val()
-  $canvas.attr 'tabindex', 0
+    null
 
   $.get '/levels/levels.json'
     .done (data) ->
       levels = data
       $sets.append $('<option>').val(i).text(x.name) for x, i in levels
+      $sets.change set_levels
+      $play.click -> play $sets.val(), $levels.val()
+      $canvas.attr 'tabindex', 0
       set_levels(); $play.click()
     .fail oops
 

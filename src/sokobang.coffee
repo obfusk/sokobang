@@ -28,12 +28,27 @@ S.start = start = (opts, level) ->                              # {{{1
   o.height_px_half  = Math.round o.height_px / 2
   o.bg_scene        = B.empty_scene o.width_px, o.height_px
   w                 = data_to_world level, o
+  $                 = opts.$ || window.$
+
+  quit = -> $(opts.canvas).trigger $.Event 'bb_quit'; null
+
+  setup = (c, hs) ->
+    h_quit = (e) -> hs.quit()
+    $(c).on 'bb_quit', h_quit
+    {h_quit}
+
+  teardown = (c, hs, sv) ->
+    $(c).off 'bb_quit', sv.h_quit
 
   bb_opts =
     canvas: opts.canvas, world: w, on_key: move_man,
     stop_when: goals_reached, to_draw: render_world,
-    last_draw: render_end, on_stop: opts.done
+    last_draw: render_end, on_stop: opts.on_done,
+    on: { quit: (w) -> B.stop_with U.extend {}, w, quit: true },
+    setup: setup, teardown: teardown
   B bb_opts
+
+  quit
                                                                 # }}}1
 
 # --
@@ -48,8 +63,8 @@ S.data_to_world = data_to_world = (data, opts) ->               # {{{1
         when '#' then walls.push    posn
         when '$' then objects.push  posn
         when '.' then goals.push    posn
-        when '*' then objects.push  posn; goals.push  posn
-        when '+' then objects.push  posn; man =       posn
+        when '*' then goals.push    posn; objects.push  posn
+        when '+' then goals.push    posn; man =         posn
   mk_world data.height, data.width, man, objects, goals, walls, opts
                                                                 # }}}1
 
@@ -58,17 +73,18 @@ S.mk_world = mk_world = (h, w, man, objects, goals, walls, opts) ->
 
 # --
 
-S.move_man = move_man = (w, k) ->
+S.move_man = move_man = (w, k) ->                               # {{{1
   return w unless is_dir k
   move_posn = move w.man, k
   return w if one_of w.walls, move_posn
   w_ = U.extend {}, w, man: move_posn
   return w_ unless one_of w.objects, move_posn
   push_posn = move move_posn, k
-  return w if one_of w.walls, push_posn || one_of w.objects, push_posn
+  return w if one_of(w.walls, push_posn) || one_of(w.objects, push_posn)
   objs_ = for o in w.objects
     if U.isEqual o, move_posn then push_posn else o
   U.extend {}, w_, objects: objs_
+                                                                # }}}1
 
 S.goals_reached = goals_reached = (w) ->
   U.isEqual sorted_positions(w.objects), sorted_positions(w.goals)
@@ -79,6 +95,7 @@ S.render_world = render_world = (w) ->
   place_man w, place_objects w, place_goals w, place_walls w, w.opts.bg_scene
 
 S.render_end = render_end = (w) ->
+  return render_world w if w.quit
   B.place_text w.opts.you_won, w.opts.width_px_half,
     w.opts.height_px_half, w.opts.endgame_text_size, 'black',
     render_world(w)
@@ -99,7 +116,7 @@ S.place_objects = place_objects = (w, scene) ->
                        w.opts, scene)
 
 S.place_goals = place_goals = (w, scene) ->
-  goals = U.reject w.goals, (p) -> U.isEqual(p, w.man) || one_of w.objects, p
+  goals = U.reject w.goals, (p) -> U.isEqual(p, w.man) || one_of(w.objects, p)
   img_list_and_scene goals, w.opts.goal_img, w.opts, scene
 
 S.place_walls = place_walls = (w, scene) ->
