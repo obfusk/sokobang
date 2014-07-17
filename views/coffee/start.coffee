@@ -40,7 +40,7 @@ $ ->
   next_level = ->
     s = current.set; l = current.level
     if l < levels[s].levels - 1
-      $levels.val l + 1
+      $sets.val s; $levels.val l + 1
     else
       if s < levels.length - 1
         $sets.val s + 1; set_levels()

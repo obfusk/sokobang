@@ -2,10 +2,10 @@
 
     File        : README.md
     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-    Date        : 2014-07-17
+    Date        : 2014-07-18
 
     Copyright   : Copyright (C) 2014  Felix C. Stegerman
-    Version     : v0.1.1
+    Version     : v0.1.2
 
 []: }}}1
 
@@ -25,18 +25,20 @@
 ## Specs & Docs
 []: {{{1
 
-    $ rake spec   # TODO
-    $ rake docs
+```bash
+$ rake spec   # TODO
+$ rake docs
+```
 
 []: }}}1
 
 ## TODO
 []: {{{1
 
-  * fix slowness on large levels
-  * reload level
-  * improve render_end
-  * improve state handling in start.coffee
+  * further optimize drawing?
+  * reload level?
+  * improve render_end?
+  * improve state handling in start.coffee?
   * specs/docs?
   * ...
 

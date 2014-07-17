@@ -2,7 +2,7 @@
 #
 #     File        : sokobang.coffee
 #     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-#     Date        : 2014-07-17
+#     Date        : 2014-07-18
 #
 #     Copyright   : Copyright (C) 2014  Felix C. Stegerman
 #     Licence     : AGPLv3+
@@ -47,7 +47,6 @@ S.start = start = (opts, level) ->                              # {{{1
     # queue: 1, on_tick: true
 
   B bb_opts
-
   quit
                                                                 # }}}1
 
@@ -55,6 +54,7 @@ S.start = start = (opts, level) ->                              # {{{1
 
 S.data_to_world = data_to_world = (data, opts) ->               # {{{1
   objects = []; goals = []; walls = []; man = null
+  meta = objects: {}, goals: {}, walls: {}
   for row, i in data.data
     for cell, j in row
       posn = x: j, y: i
@@ -65,12 +65,24 @@ S.data_to_world = data_to_world = (data, opts) ->               # {{{1
         when '.' then goals.push    posn
         when '*' then goals.push    posn; objects.push  posn
         when '+' then goals.push    posn; man =         posn
-  { h: data.height, w: data.width, man, objects, goals, walls, opts, \
-    prev: null, moves: 0, pushes: 0 }
-
+  for o in objects
+    meta.objects[posn_str o] = o
+  for g in goals
+    meta.goals[posn_str g] = g
+  for w in walls
+    meta.walls[posn_str w] = w
+  { h: data.height, w: data.width, man, objects, goals, walls, meta, \
+    opts, prev: null, moves: 0, pushes: 0 }
                                                                 # }}}1
 
-S.update_world = update_world = (w, w_) -> U.extend {}, w, w_
+S.update_world = update_world = (w, w_) ->
+  w2 = U.extend {}, w, w_
+  if w_.objects
+    w2.meta = U.extend {}, w2.meta, objects: {}
+    for o in w2.objects
+      w2.meta.objects[posn_str o] = o
+  w2
+
 
 # --
 
@@ -78,11 +90,12 @@ S.move_man = move_man = (w, k) ->                               # {{{1
   return w.prev || w if k == 'u'  # undo
   return w unless is_dir k
   move_posn = move w.man, k
-  return w if one_of w.walls, move_posn
+  return w if w.meta.walls[posn_str move_posn]
   w_ = update_world w, man: move_posn, prev: w, moves: w.moves + 1
-  return w_ unless one_of w.objects, move_posn
+  return w_ unless w.meta.objects[posn_str move_posn]
   push_posn = move move_posn, k
-  return w if one_of(w.walls, push_posn) || one_of(w.objects, push_posn)
+  return w if w.meta.  walls[posn_str push_posn] ||
+              w.meta.objects[posn_str push_posn]
   objs_ = for o in w.objects
     if U.isEqual o, move_posn then push_posn else o
   update_world w_, objects: objs_, pushes: w.pushes + 1
@@ -95,6 +108,7 @@ S.goals_reached = goals_reached = (w) ->
 
 S.render_world = render_world = (w) ->
   place_man w, place_objects w, place_goals w, place_walls w, w.opts.bg_scene
+  # NB: place man over goals!
 
 S.render_end = render_end = (w) ->
   return render_world w if w.quit
@@ -105,21 +119,19 @@ S.render_end = render_end = (w) ->
 # --
 
 S.place_man = place_man = (w, scene) ->
-  img = if one_of w.goals, w.man then w.opts.man_goal_img else w.opts.man_img
+  img = if w.meta.goals[posn_str w.man]
+    w.opts.man_goal_img
+  else
+    w.opts.man_img
   img_and_scene w.man, img, w.opts, scene
 
 S.place_objects = place_objects = (w, scene) ->
-  overlap = for p in w.objects
-    U.filter w.goals, (q) -> U.isEqual p, q
-  objects = U.reject w.objects, (p, i) ->
-    U.isEqual(p, w.man) || overlap[i].length
-  img_list_and_scene objects, w.opts.object_img, w.opts,
-    img_list_and_scene(U.flatten(overlap, true), w.opts.object_goal_img,
-                       w.opts, scene)
+  [obj_goals,objs] = U.partition w.objects, (o) -> w.meta.goals[posn_str o]
+  img_list_and_scene objs, w.opts.object_img, w.opts,
+    img_list_and_scene(obj_goals, w.opts.object_goal_img, w.opts, scene)
 
 S.place_goals = place_goals = (w, scene) ->
-  goals = U.reject w.goals, (p) -> U.isEqual(p, w.man) || one_of(w.objects, p)
-  img_list_and_scene goals, w.opts.goal_img, w.opts, scene
+  img_list_and_scene w.goals, w.opts.goal_img, w.opts, scene
 
 S.place_walls = place_walls = (w, scene) ->
   img_list_and_scene w.walls, w.opts.wall_img, w.opts, scene
@@ -147,7 +159,7 @@ S.move = move = (posn, d) ->
     when 'left'   then U.extend {}, posn, x: posn.x - 1
     when 'right'  then U.extend {}, posn, x: posn.x + 1
 
-S.one_of = one_of = (xs, x) -> U.some xs, (y) -> U.isEqual x, y
+S.posn_str = posn_str = (posn) -> "#{posn.x},#{posn.y}"
 
 S.sorted_positions = sorted_positions = (xs) ->
   U.sortBy xs, (x) -> [x.x,x.y]
