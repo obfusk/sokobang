@@ -18,7 +18,7 @@
   in coffeescript using the bigbang.coffee [2] library.
 
   To run the game, you will need bigbang.coffee; when using git, use
-  `git submodule update --init` to fetch and use these dependencies.
+  `git submodule update --init` to fetch and use the dependencies.
 
 []: }}}1
 
