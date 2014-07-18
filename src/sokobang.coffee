@@ -16,7 +16,7 @@ S = exports ? this.sokobang ||= {}
 # --
 
 S.defaults = defaults =
-  endgame_text_size: '5em', img_size: 48, you_won: 'You did it!'
+  endgame_text_size: '3em', img_size: 48, you_won: 'You did it!'
 
 # --
 
