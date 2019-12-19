@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sokoban(g)</title>
+    <style>
+      body, html  { width: 100%; height: 100%; margin: 0px; }
+      #CANVAS     { display: block; border: 1px solid black;
+                    background-color: #666; }
+      .center     { text-align: center; padding: 10px; }
+      .hidden     { display: none; }
+      .middle     { margin: 0px auto; }
+      .w700       { max-width: 700px; }
+    </style>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/underscore-min.js"></script>
+    <script src="/coffee/bigbang.js"></script>
+    <script src="/coffee/sokobang.js"></script>
+    <script src="/coffee/start.js"></script>
+  </head>
+  <body>
+    <div id="images" class="hidden">
+      <img id="goal_img"        src="/img/goal.png"        alt="IMG" />
+      <img id="man_img"         src="/img/man.png"         alt="IMG" />
+      <img id="man_goal_img"    src="/img/man_goal.png"    alt="IMG" />
+      <img id="object_img"      src="/img/object.png"      alt="IMG" />
+      <img id="object_goal_img" src="/img/object_goal.png" alt="IMG" />
+      <img id="wall_img"        src="/img/wall.png"        alt="IMG" />
+    </div>
+    <div id="link" class="center">
+      &rarr;
+      <a href="https://github.com/obfusk/sokobang">
+        https://github.com/obfusk/sokobang
+      </a>
+    </div>
+    <div id="controls" class="center">
+      <label>Set:</label>
+      <select id="sets"></select>
+      <label>Level:</label>
+      <select id="levels"></select>
+      <button id="play">Play</button>
+      <button id="next">Next</button>
+    </div>
+    <canvas id="CANVAS" class="middle"></canvas>
+    <div id="data" class="center">
+      <label>Set:</label>
+      <span id="set">?</span>
+      &mdash;
+      <label>Level:</label>
+      <span id="level">?</span>
+      &mdash;
+      <label>Moves:</label>
+      <span id="moves">?</span>
+      &mdash;
+      <label>Pushes:</label>
+      <span id="pushes">?</span>
+    </div>
+    <hr class="w700" />
+    <div id="instructions" class="center middle w700">
+      Move the objects to the goals by pushing them (using as few
+      moves and pushes as possible).  Use the <strong>arrow
+      keys</strong> to move; press <strong>u</strong> to undo the last
+      move.
+    </div>
+  </body>
+</html>
