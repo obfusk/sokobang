@@ -3,34 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+      content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <title>Sokoban(g)</title>
+    <link rel="stylesheet" href="css/bootstrap-flatly.min.css" />
+<!--<link rel="stylesheet" href="css/bootstrap-darkly.min.css" />-->
     <style>
-      body, html      { width: 100%; height: 100%; margin: 0px;
-                        font-family: "DejaVu Sans", -apple-system,
-                        BlinkMacSystemFont, "Segoe UI", Roboto,
-                        "Helvetica Neue", Arial, sans-serif; }
-      #CANVAS         { display: block; border: 1px solid black;
-                        background-color: #666; }
-      .center         { text-align: center; padding: 10px; }
-      .hidden         { display: none; }
-      .middle         { margin: 0px auto; }
-      .w700           { max-width: 700px; }
-      .nowrap         { display: inline-block; }
-      select, button  { font-size: 1em; }
-      #buttons button { font-size: 28px; height: 48px; width: 48px;
-                        background-color: white;
-                        border: 1px solid black; border-radius: 5px; }
-      #controls span  { padding: 0.2em; }
+      #CANVAS { display: block; border: 1px solid black;
+                background-color: #666; }
+      .nowrap { display: inline-block; }
     </style>
-    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-3.5.1.min.js"></script>
+<!--<script src="js/popper-1.16.0.min.js"></script>-->
+<!--<script src="js/bootstrap.min.js"></script>-->
     <script src="js/underscore-min.js"></script>
     <script src="coffee/bigbang.js"></script>
     <script src="coffee/sokobang.js"></script>
     <script src="coffee/start.js"></script>
   </head>
-  <body>
-    <div id="images" class="hidden">
+  <body class="text-center">
+    <div id="images" class="d-none">
       <img id="goal_img"        src="img/goal.png"        alt="IMG" />
       <img id="man_img"         src="img/man.png"         alt="IMG" />
       <img id="man_goal_img"    src="img/man_goal.png"    alt="IMG" />
@@ -38,58 +29,74 @@
       <img id="object_goal_img" src="img/object_goal.png" alt="IMG" />
       <img id="wall_img"        src="img/wall.png"        alt="IMG" />
     </div>
-    <div id="controls" class="center">
-      <span class="nowrap">
-        <label>Set:</label>
-        <select id="sets"></select>
-      </span>
-      <span class="nowrap">
-        <label>Level:</label>
-        <select id="levels"></select>
-      </span>
-      <span class="nowrap">
-        <button id="play">Play</button>
-        <button id="next">Next</button>
-      </span>
+    <div class="container">
+      <div class="row justify-content-center p-1">
+        <div id="controls" class="card col-lg-9">
+          <div class="card-body form-inline justify-content-center align-items-end p-2">
+            <span class="form-group m-1">
+              <label for="sets">Set</label>
+              &nbsp;
+              <select class="form-control" id="sets"></select>
+            </span>
+            <span class="form-group m-1">
+              <label for="levels">Level</label>
+              &nbsp;
+              <select class="form-control" id="levels"></select>
+            </span>
+            <span class="m-1">
+              <button class="btn btn-primary" id="play">Play</button>
+            </span>
+            <span class="m-1">
+              <button class="btn btn-primary" id="next">Next</button>
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
-    <canvas id="CANVAS" class="middle"></canvas>
-    <div id="data" class="center">
-      <label>Set:</label>
-      <span id="set">?</span>
-      &mdash;
-      <label>Level:</label>
-      <span id="level">?</span>
-      &mdash;
-      <label>Moves:</label>
-      <span id="moves">?</span>
-      &mdash;
-      <label>Pushes:</label>
-      <span id="pushes">?</span>
+    <canvas id="CANVAS" class="m-auto"></canvas>
+    <div class="container">
+      <div class="row justify-content-center p-1">
+        <div class="card col-lg-9">
+          <div class="card-body p-2">
+            <div id="data">
+              <span id="set">?</span>
+              <label>Level</label>
+              <span id="level" class="badge badge-info">?</span>
+              &mdash;
+              <span id="moves" class="badge badge-info">?</span>
+              <label>Moves</label>
+              &mdash;
+              <span id="pushes" class="badge badge-info">?</span>
+              <label>Pushes</label>
+            </div>
+            <div id="buttons" class="mt-1">
+              <button id="left"  class="btn btn-lg btn-outline-primary">⇦</button>
+              <button id="down"  class="btn btn-lg btn-outline-primary">⇩</button>
+              <button id="up"    class="btn btn-lg btn-outline-primary">⇧</button>
+              <button id="right" class="btn btn-lg btn-outline-primary">⇨</button>
+              <button id="undo"  class="btn btn-lg btn-outline-primary">u</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center px-1 pt-0 pb-1">
+        <div class="alert alert-light col-lg-9 mb-0" role="alert">
+          Move the objects to the goals by pushing them (using as few
+          moves and pushes as possible).  Use the <strong>arrow keys or
+          buttons</strong> to move; press <strong>u</strong> to undo the
+          last move.
+        </div>
+      </div>
+      <hr/>
     </div>
-    <div id="buttons" class="center">
-      <button id="left" >⇦</button>
-      <button id="down" >⇩</button>
-      <button id="up"   >⇧</button>
-      <button id="right">⇨</button>
-      <button id="undo" >u</button>
-    </div>
-    <hr class="w700" />
-    <div id="instructions" class="center middle w700">
-      Move the objects to the goals by pushing them (using as few
-      moves and pushes as possible).  Use the <strong>arrow keys or
-      buttons</strong> to move; press <strong>u</strong> to undo the
-      last move.
-    </div>
-    <hr class="w700" />
-    <footer class="center">
+    <footer class="mb-3">
       <small>
         <span class="nowrap">
           © 2020 Felix C. Stegerman
         </span>
-        <span class="nowrap">
-          » <a href="https://ko-fi.com/obfusk"
-              target="_blank" rel="noopener">♥ Support</a>
-        </span>
+        <a href="https://ko-fi.com/obfusk"
+          target="_blank" rel="noopener"
+          class="btn btn-outline-primary btn-sm py-0">♥ Support</a>
         <span class="nowrap">
           » <a href="https://github.com/obfusk/sokobang"
               target="_blank" rel="noopener">Code</a>:
