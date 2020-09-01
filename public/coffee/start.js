@@ -40,7 +40,13 @@
     start = function(level) {
       $canvas.focus();
       done = null;
-      return quit = sokobang.start(opts, level);
+      quit = sokobang.start(opts, level);
+      $('meta[name=viewport]').attr('content', function(i, c) {
+        return c.replace(/width=[^,]*/, "width=" + ($canvas.width() + 2));
+      });
+      return $('body').css({
+        'min-width': $canvas.width() + 2
+      });
     };
     play = function(set, level) {
       $play.prop('disabled', true);

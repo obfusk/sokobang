@@ -1,7 +1,9 @@
 *~
 *.swp
 
+.buildozer
 /bin
+
 /doc
 /node_modules
 /src/*.js

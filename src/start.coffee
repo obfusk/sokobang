@@ -27,6 +27,9 @@ $ ->
 
   start = (level) ->
     $canvas.focus(); done = null; quit = sokobang.start opts, level
+    $('meta[name=viewport]').attr 'content', (i, c) ->
+      c.replace /width=[^,]*/, "width=#{$canvas.width() + 2}"
+    $('body').css 'min-width': $canvas.width() + 2
 
   play = (set, level) ->
     $play.prop 'disabled', true; current = {set,level}
