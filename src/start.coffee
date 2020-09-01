@@ -32,7 +32,7 @@ $ ->
     $play.prop 'disabled', true; current = {set,level}
     $set.text levels[set].name; $level.text level + 1; on_update 0, 0
     done = ->
-      $.get "/levels/level_#{set}_#{level}.json"
+      $.get "levels/level_#{set}_#{level}.json"
         .done (data) -> $play.prop 'disabled', false; start data
         .fail oops
     if quit then quit() else done()
@@ -66,7 +66,7 @@ $ ->
   $('body').on 'keydown', (e) ->
     $canvas.trigger e if Object.values(btns).includes e.which
 
-  $.get '/levels/levels.json'
+  $.get 'levels/levels.json'
     .done (data) ->
       levels = data
       $sets.append $('<option>').val(i).text(x.name) for x, i in levels
