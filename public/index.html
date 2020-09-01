@@ -4,34 +4,32 @@
     <meta charset="UTF-8" />
     <title>Sokoban(g)</title>
     <style>
-      body, html  { width: 100%; height: 100%; margin: 0px; }
-      #CANVAS     { display: block; border: 1px solid black;
-                    background-color: #666; }
-      .center     { text-align: center; padding: 10px; }
-      .hidden     { display: none; }
-      .middle     { margin: 0px auto; }
-      .w700       { max-width: 700px; }
+      body, html      { width: 100%; height: 100%; margin: 0px; }
+      #CANVAS         { display: block; border: 1px solid black;
+                        background-color: #666; }
+      .center         { text-align: center; padding: 10px; }
+      .hidden         { display: none; }
+      .middle         { margin: 0px auto; }
+      .w700           { max-width: 700px; }
+      .nowrap         { display: inline-block; }
+      select, button  { font-size: 1em; }
+      #buttons button { font-size: 2em; height: 1.5em; width: 1.5em;
+                        border: 1px solid black; }
     </style>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/underscore-min.js"></script>
-    <script src="/coffee/bigbang.js"></script>
-    <script src="/coffee/sokobang.js"></script>
-    <script src="/coffee/start.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="coffee/bigbang.js"></script>
+    <script src="coffee/sokobang.js"></script>
+    <script src="coffee/start.js"></script>
   </head>
   <body>
     <div id="images" class="hidden">
-      <img id="goal_img"        src="/img/goal.png"        alt="IMG" />
-      <img id="man_img"         src="/img/man.png"         alt="IMG" />
-      <img id="man_goal_img"    src="/img/man_goal.png"    alt="IMG" />
-      <img id="object_img"      src="/img/object.png"      alt="IMG" />
-      <img id="object_goal_img" src="/img/object_goal.png" alt="IMG" />
-      <img id="wall_img"        src="/img/wall.png"        alt="IMG" />
-    </div>
-    <div id="link" class="center">
-      &rarr;
-      <a href="https://github.com/obfusk/sokobang">
-        https://github.com/obfusk/sokobang
-      </a>
+      <img id="goal_img"        src="img/goal.png"        alt="IMG" />
+      <img id="man_img"         src="img/man.png"         alt="IMG" />
+      <img id="man_goal_img"    src="img/man_goal.png"    alt="IMG" />
+      <img id="object_img"      src="img/object.png"      alt="IMG" />
+      <img id="object_goal_img" src="img/object_goal.png" alt="IMG" />
+      <img id="wall_img"        src="img/wall.png"        alt="IMG" />
     </div>
     <div id="controls" class="center">
       <label>Set:</label>
@@ -55,12 +53,41 @@
       <label>Pushes:</label>
       <span id="pushes">?</span>
     </div>
+    <div id="buttons" class="center">
+      <button id="left" >⇦</button>
+      <button id="down" >⇩</button>
+      <button id="up"   >⇧</button>
+      <button id="right">⇨</button>
+      <button id="undo" >u</button>
+    </div>
     <hr class="w700" />
     <div id="instructions" class="center middle w700">
       Move the objects to the goals by pushing them (using as few
-      moves and pushes as possible).  Use the <strong>arrow
-      keys</strong> to move; press <strong>u</strong> to undo the last
-      move.
+      moves and pushes as possible).  Use the <strong>arrow keys or
+      buttons</strong> to move; press <strong>u</strong> to undo the
+      last move.
     </div>
+    <hr class="w700" />
+    <footer class="center">
+      <small>
+        <span class="nowrap">
+          © 2020 Felix C. Stegerman
+        </span>
+        <span class="nowrap">
+          » <a href="https://ko-fi.com/obfusk"
+              target="_blank" rel="noopener">♥ Support</a>
+        </span>
+        <span class="nowrap">
+          » <a href="https://github.com/obfusk/sokobang"
+              target="_blank" rel="noopener">Code</a>:
+          <a href="https://www.gnu.org/licenses/agpl-3.0.html"
+            target="_blank" rel="noopener">AGPLv3+</a>
+        </span>
+        <span class="nowrap">
+          » <a href="README.ksokoban.txt" target="_blank"
+              rel="noopener">Images &amp; Levels</a>
+        </span>
+      </small>
+    </footer>
   </body>
 </html>

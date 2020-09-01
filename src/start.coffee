@@ -2,9 +2,9 @@
 #
 #     File        : start.coffee
 #     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-#     Date        : 2014-07-17
+#     Date        : 2020-09-01
 #
-#     Copyright   : Copyright (C) 2014  Felix C. Stegerman
+#     Copyright   : Copyright (C) 2020  Felix C. Stegerman
 #     Licence     : AGPLv3+
 #
 # <!-- }}}1 -->
@@ -53,6 +53,18 @@ $ ->
     for i in [0 .. levels[n].levels - 1]
       $levels.append $('<option>').val(i).text i + 1
     null
+
+  kc    = bigbang.keycodes
+  btns  =
+    left: kc.LEFT, down: kc.DOWN, up: kc.UP, right: kc.RIGHT,
+    undo: 'U'.charCodeAt()
+
+  for k, v of btns
+    do (k, v) -> $("##{k}").on 'click', ->
+      $canvas.trigger $.Event 'keydown', which: v
+
+  $('body').on 'keydown', (e) ->
+    $canvas.trigger e if Object.values(btns).includes e.which
 
   $.get '/levels/levels.json'
     .done (data) ->
