@@ -1,6 +1,7 @@
 *~
 *.swp
 
+/bin
 /doc
 /node_modules
 /src/*.js
