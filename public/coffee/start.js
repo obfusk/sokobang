@@ -52,7 +52,7 @@
       $level.text(level + 1);
       on_update(0, 0);
       done = function() {
-        return $.get("/levels/level_" + set + "_" + level + ".json").done(function(data) {
+        return $.get("levels/level_" + set + "_" + level + ".json").done(function(data) {
           $play.prop('disabled', false);
           return start(data);
         }).fail(oops);
@@ -113,7 +113,7 @@
         return $canvas.trigger(e);
       }
     });
-    return $.get('/levels/levels.json').done(function(data) {
+    return $.get('levels/levels.json').done(function(data) {
       var i, len1, o;
       levels = data;
       for (i = o = 0, len1 = levels.length; o < len1; i = ++o) {
