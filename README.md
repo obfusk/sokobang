@@ -17,6 +17,8 @@
 
 sokobang - sokoban puzzle w/ bigbang.coffee
 
+→ https://obfusk.ch/sokobang
+
 A sokoban puzzle -- with images and levels from
 [ksokoban](https://projects.kde.org/projects/playground/games/ksokoban/repository)
 -- written in coffeescript using the
