@@ -43,13 +43,13 @@
       x = ($canvas.width() - $game.width()) / 2;
       y = ($canvas.height() - $game.height()) / 2;
       $game.scrollLeft(x).scrollTop(y);
-      return $('#buttons')[0].scrollIntoView(false);
+      return $('#data-and-buttons')[0].scrollIntoView(false);
     };
     get_lvl = function() {
-      return (localStorage.getItem("level") || "0_0").split("_");
+      return (location.hash.slice(1) || localStorage.getItem("level") || "0_0").split("_");
     };
     set_lvl = function() {
-      return localStorage.setItem("level", current.set + "_" + current.level);
+      return localStorage.setItem("level", location.hash = current.set + "_" + current.level);
     };
     on_done = function(w) {
       if (!w.quit) {

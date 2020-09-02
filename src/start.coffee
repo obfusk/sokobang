@@ -29,12 +29,14 @@ $ ->
     x = ($canvas.width()  - $game.width() ) / 2
     y = ($canvas.height() - $game.height()) / 2
     $game.scrollLeft(x).scrollTop(y)
-    $('#buttons')[0].scrollIntoView false
+    $('#data-and-buttons')[0].scrollIntoView false
 
   get_lvl = ->
-    (localStorage.getItem("level") || "0_0").split "_"
+    (location.hash.slice(1) || localStorage.getItem("level") || "0_0")
+    .split "_"
   set_lvl = ->
-    localStorage.setItem("level", "#{current.set}_#{current.level}")
+    localStorage.setItem "level",
+      location.hash = "#{current.set}_#{current.level}"
 
   on_done = (w) ->
     completed_level() unless w.quit
