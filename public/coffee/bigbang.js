@@ -5,9 +5,9 @@
  *
  *     File        : bigbang.coffee
  *     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
- *     Date        : 2014-07-18
+ *     Date        : 2020-09-02
  *
- *     Copyright   : Copyright (C) 2014  Felix C. Stegerman
+ *     Copyright   : Copyright (C) 2020  Felix C. Stegerman
  *     Licence     : LGPLv3+
  *     Version     : v0.2.1
  *
@@ -51,7 +51,7 @@
     };
   };
 
-  B.requestAnimationFrame = requestAnimationFrame = (typeof window !== "undefined" && window !== null ? window.webkitRequestAnimationFrame : void 0) || (typeof window !== "undefined" && window !== null ? window.mozRequestAnimationFrame : void 0) || polyRequestAnimationFrame({
+  B.requestAnimationFrame = requestAnimationFrame = (typeof window !== "undefined" && window !== null ? window.requestAnimationFrame : void 0) || (typeof window !== "undefined" && window !== null ? window.webkitRequestAnimationFrame : void 0) || (typeof window !== "undefined" && window !== null ? window.mozRequestAnimationFrame : void 0) || polyRequestAnimationFrame({
     warn: true
   });
 
