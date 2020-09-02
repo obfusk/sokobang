@@ -16,7 +16,18 @@ $ ->
   $moves  = $ '#moves'  ; $pushes = $ '#pushes'
   levels  = quit = done = null; current = set: 0, level: 0
 
-  on_done   = -> quit = null; done?()
+  completed_level = (c = current) ->
+    localStorage.setItem "level #{c.set} #{c.level}", "done"
+    e = $levels.children()[c.level]
+    $(e).text (i, t) -> if t.endsWith("✓") then t else t + " ✓"
+
+  level_completed = (c = current) ->
+    localStorage.getItem("level #{c.set} #{c.level}") == "done"
+
+  on_done = (w) ->
+    completed_level() unless w.quit
+    quit = null; done?()
+
   on_update = (m, p) -> $moves.text m; $pushes.text p
 
   oops    = -> alert 'We apologise for the inconvenience...'
@@ -33,6 +44,7 @@ $ ->
 
   play = (set, level) ->
     $play.prop 'disabled', true; current = {set,level}
+    $('#completed')[if level_completed() then "show" else "hide"]()
     $set.text levels[set].name; $level.text level + 1; on_update 0, 0
     done = ->
       $.get "levels/level_#{set}_#{level}.json"
@@ -54,7 +66,8 @@ $ ->
   set_levels = ->
     n = parseInt $sets.val(); $levels.empty()
     for i in [0 .. levels[n].levels - 1]
-      $levels.append $('<option>').val(i).text i + 1
+      t = i + 1; t += " ✓" if level_completed set: n, level: i
+      $levels.append $('<option>').val(i).text t
     null
 
   kc    = bigbang.keycodes
