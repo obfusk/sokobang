@@ -19,10 +19,12 @@
     <link rel="stylesheet" href="css/bootstrap-flatly.min.css" />
 <!--<link rel="stylesheet" href="css/bootstrap-darkly.min.css" />-->
     <style>
-      #game   { overflow: auto; max-height: calc(100vh - 150px); }
-      #CANVAS { display: block; border: 1px solid black;
-                background-color: #666; }
-      .nowrap { display: inline-block; }
+      #game, .zoom  { max-height: calc(100vh - 150px); }
+      #game         { overflow: auto; }
+      .zoom         { object-fit: contain; max-width: 100%; }
+      #CANVAS       { display: block; border: 1px solid black;
+                      background-color: #666; }
+      .nowrap       { display: inline-block; }
     </style>
     <script src="js/jquery-3.5.1.min.js"></script>
 <!--<script src="js/popper-1.16.0.min.js"></script>-->
@@ -58,7 +60,11 @@
             </span>
             <span class="nowrap m-1">
               <button class="btn btn-primary" id="play">Play</button>
-              <button class="btn btn-primary" id="next">Next</button>
+              <button class="btn btn-primary" id="next">Next »</button>
+            </span>
+            <span class="form-group m-1 form-check form-check-inline w-auto">
+              <input class="form-check-input" type="checkbox" id="zoom">
+              <label class="form-check-label" for="zoom">Zoom out</label>
             </span>
           </div>
         </div>

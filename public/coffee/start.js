@@ -106,7 +106,7 @@
       } else {
         done();
       }
-      return setTimeout(scroll_to_center, 100);
+      return setTimeout(scroll_to_center, 1000);
     };
     next_level = function() {
       var l, s;
@@ -164,6 +164,10 @@
       if (Object.values(btns).includes(e.which)) {
         return $canvas.trigger(e);
       }
+    });
+    $('#zoom').change(function() {
+      $canvas.toggleClass("zoom", this.checked);
+      return setTimeout(scroll_to_center, 1000);
     });
     return $.get('levels/levels.json').done(function(data) {
       var i, len1, lvl, o, ref1, set;

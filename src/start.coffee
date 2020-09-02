@@ -63,7 +63,7 @@ $ ->
         .done (data) -> $play.prop 'disabled', false; start data
         .fail oops
     if quit then quit() else done()
-    setTimeout scroll_to_center, 100                            # TODO
+    setTimeout scroll_to_center, 1000                           # TODO
 
   next_level = ->
     s = current.set; l = current.level
@@ -94,6 +94,10 @@ $ ->
 
   $('body').on 'keydown', (e) ->
     $canvas.trigger e if Object.values(btns).includes e.which
+
+  $('#zoom').change ->
+    $canvas.toggleClass "zoom", this.checked
+    setTimeout scroll_to_center, 1000                           # TODO
 
   $.get 'levels/levels.json'
     .done (data) ->
