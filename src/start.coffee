@@ -25,19 +25,16 @@ $ ->
   level_completed = (c = current) ->
     localStorage.getItem("level #{c.set} #{c.level}") == "done"
 
-  scroll_to_center = ->
+  scroll = ->
     x = ($canvas.width()  - $game.width() ) / 2
     y = ($canvas.height() - $game.height()) / 2
     $game.scrollLeft(x).scrollTop(y)
+    $('#buttons')[0].scrollIntoView false
 
   get_lvl = ->
-    h = location.hash.slice 1
-    l = localStorage.getItem "level"
-    (h or l or "0_0").split "_"
-
+    (localStorage.getItem("level") || "0_0").split "_"
   set_lvl = ->
-    location.hash = h = "#{current.set}_#{current.level}"
-    localStorage.setItem("level", h)
+    localStorage.setItem("level", "#{current.set}_#{current.level}")
 
   on_done = (w) ->
     completed_level() unless w.quit
@@ -63,7 +60,7 @@ $ ->
         .done (data) -> $play.prop 'disabled', false; start data
         .fail oops
     if quit then quit() else done()
-    setTimeout scroll_to_center, 1000                           # TODO
+    setTimeout scroll, 500                                      # TODO
 
   next_level = ->
     s = current.set; l = current.level
@@ -97,7 +94,7 @@ $ ->
 
   $('#zoom').change ->
     $canvas.toggleClass "zoom", this.checked
-    setTimeout scroll_to_center, 1000                           # TODO
+    setTimeout scroll, 500                                      # TODO
 
   $.get 'levels/levels.json'
     .done (data) ->
