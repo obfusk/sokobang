@@ -1,4 +1,5 @@
 from pythonforandroid.recipe import PythonRecipe
+from pythonforandroid.logger import info
 
 class FlaskRecipe(PythonRecipe):
     version = '1.1.2'
