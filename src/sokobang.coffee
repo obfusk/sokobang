@@ -102,12 +102,12 @@ S.move_man = move_man = (w, k) ->                               # {{{1
                                                                 # }}}1
 
 S.move_man_click = move_man_click = (w, x, y) ->
-  [man_x, man_y] = posn_to_canvas_xy w.man, w.opts
-  dx = man_x - x; dy = man_y - y
+  dx = x - w.opts.canvas.clientWidth  / 2
+  dy = y - w.opts.canvas.clientHeight / 2
   move_man w, if Math.abs(dx) > Math.abs(dy)
-    if dx > 0 then 'left' else 'right'
+    if dx < 0 then 'left' else 'right'
   else
-    if dy > 0 then 'up' else 'down'
+    if dy < 0 then 'up' else 'down'
 
 S.goals_reached = goals_reached = (w) ->
   U.isEqual sorted_positions(w.objects), sorted_positions(w.goals)

@@ -31,9 +31,9 @@
     <script src="js/bootstrap.min.js"></script>
     <script src="js/underscore-min.js"></script>
     <script src="js/alert.js"></script>
-    <script src="coffee/bigbang.js?v=1"></script>
-    <script src="coffee/sokobang.js?v=1"></script>
-    <script src="coffee/start.js?v=2"></script>
+    <script src="coffee/bigbang.js?t={{ now }}"></script>
+    <script src="coffee/sokobang.js?t={{ now }}"></script>
+    <script src="coffee/start.js?t={{ now }}"></script>
   </head>
   <body class="text-center">
     <div id="images" class="d-none">
@@ -78,16 +78,19 @@
         <div id="data-and-buttons" class="card col-lg-9">
           <div class="card-body p-2">
             <div id="data">
-              <span id="set">?</span>
-              <label>Level</label>
-              <span id="level" class="badge badge-info">?</span>
-              <span id="completed" class="badge badge-success">✓</span>
-              &mdash;
-              <span id="moves" class="badge badge-info">?</span>
-              <label>Moves</label>
-              &mdash;
-              <span id="pushes" class="badge badge-info">?</span>
-              <label>Pushes</label>
+              <span class="nowrap">
+                <span id="set">?</span>
+                <label>Level</label>
+                <span id="level" class="badge badge-info">?</span>
+                <span id="completed" class="badge badge-success">✓</span>
+              </span>
+              <span class="nowrap">
+                »
+                <span id="moves" class="badge badge-info">?</span>
+                <label>Moves</label>
+                <span id="pushes" class="badge badge-info">?</span>
+                <label>Pushes</label>
+              </span>
             </div>
             <div id="buttons" class="mt-1">
               <button id="left"  class="btn btn-lg btn-outline-primary">⇦</button>
@@ -101,11 +104,12 @@
       </div>
       <div class="row justify-content-center px-1 pt-0 pb-1">
         <div class="alert alert-light col-lg-9 mb-0" role="alert">
-          Move the objects to the goals by pushing them (using as few
-          moves and pushes as possible).  Use the <strong>arrow
-          keys</strong> or buttons or <strong>click/tap</strong> (to
-          the left/right of or above/below the "warehouse keeper") to
-          move; press <strong>u</strong> to undo the last move.
+          Push all the red gems to the green goal squares (using as
+          few moves and pushes as possible).  Use your keyboard's
+          <strong>arrow keys</strong> or the <strong>arrow
+          buttons</strong> or <strong>click/tap</strong> on the
+          left/right/top/bottom of the board to move; press
+          <strong>u</strong> to undo the last move.
         </div>
       </div>
       <hr/>

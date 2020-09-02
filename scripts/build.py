@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import time
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
@@ -25,7 +26,7 @@ DEPENDENCIES = dict(                                            # {{{1
   werkzeug      = dict(url = "https://github.com/pallets/werkzeug"),
 )                                                               # }}}1
 
-data  = dict(DEPS = DEPENDENCIES)
+data  = dict(DEPS = DEPENDENCIES, now = time.time())
 env   = Environment(loader      = FileSystemLoader("templates"),
                     autoescape  = select_autoescape())
 

@@ -201,11 +201,10 @@
   };
 
   S.move_man_click = move_man_click = function(w, x, y) {
-    var dx, dy, man_x, man_y, ref;
-    ref = posn_to_canvas_xy(w.man, w.opts), man_x = ref[0], man_y = ref[1];
-    dx = man_x - x;
-    dy = man_y - y;
-    return move_man(w, Math.abs(dx) > Math.abs(dy) ? dx > 0 ? 'left' : 'right' : dy > 0 ? 'up' : 'down');
+    var dx, dy;
+    dx = x - w.opts.canvas.clientWidth / 2;
+    dy = y - w.opts.canvas.clientHeight / 2;
+    return move_man(w, Math.abs(dx) > Math.abs(dy) ? dx < 0 ? 'left' : 'right' : dy < 0 ? 'up' : 'down');
   };
 
   S.goals_reached = goals_reached = function(w) {

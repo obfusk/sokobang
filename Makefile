@@ -4,8 +4,10 @@ PIP_INSTALL ?= pip install
 
 .PHONY: all spec spec_verbose spec_less docs clean
 
-all:
+all: public/index.html
 	coffee -o public/coffee -c src/
+
+public/index.html: templates/index.html src/*.coffee
 	scripts/build.py
 
 spec:
