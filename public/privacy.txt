@@ -1,3 +1,3 @@
-The online version of Sokoban(g) at https://obfusk.ch/sokobang/ does not collect or store any personal data other than through standard web server log files (containing IP addresses, requested URLs, timestamps, and user agents) used only for server monitoring.  The logs are anonymised and/or deleted after a reasonable amount of time.  The web server is located in the Netherlands.
+The online version of Sokoban(g) at https://sokobang.obfusk.dev does not collect or store any personal data other than through standard web server log files (containing IP addresses, requested URLs, timestamps, and user agents) used only for server monitoring.  The logs are anonymised and/or deleted after a reasonable amount of time.  The web server is located in the Netherlands.
 
 The offline android version of Sokoban(g) does not collect any personal data whatsoever.

@@ -23,7 +23,7 @@
 
 sokobang - sokoban puzzle w/ bigbang.coffee
 
-→ https://obfusk.ch/sokobang/
+→ https://sokobang.obfusk.dev
 
 <!--
 [<img src="badges/google-play.png" alt="Get it on Google Play" height="60">](https://play.google.com/store/apps/details?id=dev.obfusk.sokobang)
