@@ -1,4 +1,15 @@
 <!doctype html>
+<!--
+
+  File        : templates/index.html
+  Maintainer  : Felix C. Stegerman <flx@obfusk.net>
+  Date        : 2020-09-02
+
+  Copyright   : Copyright (C) 2020  Felix C. Stegerman
+  Version     : v0.2.0
+  License     : AGPLv3+
+
+-->
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +19,7 @@
     <link rel="stylesheet" href="css/bootstrap-flatly.min.css" />
 <!--<link rel="stylesheet" href="css/bootstrap-darkly.min.css" />-->
     <style>
+      #game   { overflow: auto; max-height: calc(100vh - 150px); }
       #CANVAS { display: block; border: 1px solid black;
                 background-color: #666; }
       .nowrap { display: inline-block; }
@@ -16,9 +28,10 @@
 <!--<script src="js/popper-1.16.0.min.js"></script>-->
     <script src="js/bootstrap.min.js"></script>
     <script src="js/underscore-min.js"></script>
+    <script src="js/alert.js"></script>
     <script src="coffee/bigbang.js"></script>
     <script src="coffee/sokobang.js"></script>
-    <script src="coffee/start.js"></script>
+    <script src="coffee/start.js?v=0.2.0"></script>
   </head>
   <body class="text-center">
     <div id="images" class="d-none">
@@ -43,17 +56,17 @@
               &nbsp;
               <select class="form-control" id="levels"></select>
             </span>
-            <span class="m-1">
+            <span class="nowrap m-1">
               <button class="btn btn-primary" id="play">Play</button>
-            </span>
-            <span class="m-1">
               <button class="btn btn-primary" id="next">Next</button>
             </span>
           </div>
         </div>
       </div>
     </div>
-    <canvas id="CANVAS" class="m-auto"></canvas>
+    <div id="game">
+      <canvas id="CANVAS" class="m-auto"></canvas>
+    </div>
     <div class="container">
       <div class="row justify-content-center p-1">
         <div class="card col-lg-9">
@@ -116,6 +129,22 @@
         </span>
       </small>
     </footer>
+    <div class="modal" tabindex="-1" role="dialog" id="alert-modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">[...]</h5>
+            <button type="button" class="close" data-dismiss="modal"
+                aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body d-flex justify-content-end">
+            <button id="alert-ok" class="btn btn-primary">OK</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="modal text-left" tabindex="-1" role="dialog"
         id="licenses-modal">
       <div class="modal-dialog modal-lg" role="document">
