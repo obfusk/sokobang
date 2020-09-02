@@ -2,9 +2,9 @@
 #
 #     File        : sokobang.coffee
 #     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-#     Date        : 2014-07-18
+#     Date        : 2020-09-02
 #
-#     Copyright   : Copyright (C) 2014  Felix C. Stegerman
+#     Copyright   : Copyright (C) 2020  Felix C. Stegerman
 #     Licence     : AGPLv3+
 #
 # <!-- }}}1 -->
@@ -41,7 +41,7 @@ S.start = start = (opts, level) ->                              # {{{1
 
   bb_opts =
     canvas: opts.canvas, world: w, on_key: move_man,
-    stop_when: goals_reached, to_draw: draw,
+    on_click: move_man_click, stop_when: goals_reached, to_draw: draw,
     last_draw: render_end, on_stop: opts.on_done,
     on: { quit: on_quit }, setup: setup, teardown: teardown,
     # queue: 1, on_tick: true
@@ -101,6 +101,14 @@ S.move_man = move_man = (w, k) ->                               # {{{1
   update_world w_, objects: objs_, pushes: w.pushes + 1
                                                                 # }}}1
 
+S.move_man_click = move_man_click = (w, x, y) ->
+  [man_x, man_y] = posn_to_canvas_xy w.man, w.opts
+  dx = man_x - x; dy = man_y - y
+  move_man w, if Math.abs(dx) > Math.abs(dy)
+    if dx > 0 then 'left' else 'right'
+  else
+    if dy > 0 then 'up' else 'down'
+
 S.goals_reached = goals_reached = (w) ->
   U.isEqual sorted_positions(w.objects), sorted_positions(w.goals)
 
@@ -143,9 +151,11 @@ S.img_list_and_scene = img_list_and_scene = (posns, img, opts, scene) ->
   U.reduce posns, f, scene
 
 S.img_and_scene = img_and_scene = (posn, img, opts, scene) ->
-  B.place_image img,
-    (posn.x * opts.img_size + opts.img_size/2),
-    (posn.y * opts.img_size + opts.img_size/2), scene
+  B.place_image img, posn_to_canvas_xy(posn, opts)..., scene
+
+S.posn_to_canvas_xy = posn_to_canvas_xy = (posn, opts) ->
+  [posn.x * opts.img_size + opts.img_size/2,
+   posn.y * opts.img_size + opts.img_size/2]
 
 # --
 
