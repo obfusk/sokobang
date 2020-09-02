@@ -6,6 +6,7 @@ PIP_INSTALL ?= pip install
 
 all:
 	coffee -o public/coffee -c src/
+	scripts/build.py
 
 spec:
 	jasmine-node --coffee spec/

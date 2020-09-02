@@ -127,147 +127,17 @@
             </button>
           </div>
           <div class="modal-body">
-            
-              
+            {% for k, v in DEPS|dictsort %}
+              {% set name = v.get("name", k) %}
               <h6>
-                <a href="https://github.com/pallets/click" target="_blank" rel="noopener">
-                  click
+                <a href="{{ v.url }}" target="_blank" rel="noopener">
+                  {{ name }}
                 </a>
               </h6>
-              <iframe class="w-100" src="licenses/click.txt">
+              <iframe class="w-100" src="licenses/{{ name }}.txt">
               </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://github.com/pallets/flask" target="_blank" rel="noopener">
-                  flask
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/flask.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://github.com/pallets/itsdangerous" target="_blank" rel="noopener">
-                  itsdangerous
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/itsdangerous.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://github.com/pallets/jinja" target="_blank" rel="noopener">
-                  jinja2
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/jinja2.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://github.com/libffi/libffi" target="_blank" rel="noopener">
-                  libffi
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/libffi.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://github.com/pallets/markupsafe" target="_blank" rel="noopener">
-                  markupsafe
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/markupsafe.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://www.openssl.org" target="_blank" rel="noopener">
-                  openssl
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/openssl.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://github.com/kivy/python-for-android" target="_blank" rel="noopener">
-                  python-for-android
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/python-for-android.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://github.com/kivy/pyjnius" target="_blank" rel="noopener">
-                  pyjnius
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/pyjnius.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://www.python.org" target="_blank" rel="noopener">
-                  python3
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/python3.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://github.com/pypa/setuptools" target="_blank" rel="noopener">
-                  setuptools
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/setuptools.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://github.com/benjaminp/six" target="_blank" rel="noopener">
-                  six
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/six.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://www.sqlite.org" target="_blank" rel="noopener">
-                  sqlite3
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/sqlite3.txt">
-              </iframe>
-              <br/><br/>
-            
-              
-              <h6>
-                <a href="https://github.com/pallets/werkzeug" target="_blank" rel="noopener">
-                  werkzeug
-                </a>
-              </h6>
-              <iframe class="w-100" src="licenses/werkzeug.txt">
-              </iframe>
-              
-            
+              {% if not loop.last %}<br/><br/>{% endif %}
+            {% endfor %}
           </div>
         </div>
       </div>
