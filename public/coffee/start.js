@@ -14,7 +14,7 @@
     $pushes = $('#pushes');
     levels = quit = done = null;
     current = {
-      set: 0,
+      set: 3,
       level: 0
     };
     completed_level = function(c) {
@@ -46,7 +46,7 @@
       return $('#data-and-buttons')[0].scrollIntoView(false);
     };
     get_lvl = function() {
-      return (location.hash.slice(1) || localStorage.getItem("level") || "0_0").split("_");
+      return (location.hash.slice(1) || localStorage.getItem("level") || "3_0").split("_");
     };
     set_lvl = function() {
       return localStorage.setItem("level", location.hash = current.set + "_" + current.level);

@@ -15,7 +15,7 @@ $ ->
   $next   = $ '#next'   ; $canvas = $ '#CANVAS'; $game = $ '#game'
   $set    = $ '#set'    ; $level  = $ '#level'
   $moves  = $ '#moves'  ; $pushes = $ '#pushes'
-  levels  = quit = done = null; current = set: 0, level: 0
+  levels  = quit = done = null; current = set: 3, level: 0
 
   completed_level = (c = current) ->
     localStorage.setItem "level #{c.set} #{c.level}", "done"
@@ -32,7 +32,7 @@ $ ->
     $('#data-and-buttons')[0].scrollIntoView false
 
   get_lvl = ->
-    (location.hash.slice(1) || localStorage.getItem("level") || "0_0")
+    (location.hash.slice(1) || localStorage.getItem("level") || "3_0")
     .split "_"
   set_lvl = ->
     localStorage.setItem "level",
