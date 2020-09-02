@@ -10,8 +10,14 @@
 
 <!-- }}}1 -->
 
+[![GitHub Release](https://img.shields.io/github/release/obfusk/sokobang.svg?logo=github)](https://github.com/obfusk/sokobang/releases)
+[![Android Build](https://github.com/obfusk/sokobang/workflows/Android/badge.svg)](https://github.com/obfusk/sokobang/actions?query=workflow%3AAndroid)
 [![AGPLv3+](https://img.shields.io/badge/license-AGPLv3+-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.html)
 [![Sponsor](https://img.shields.io/badge/%E2%99%A5-support-violet.svg)](https://ko-fi.com/obfusk)
+
+<!--
+[![F-Droid Version](https://img.shields.io/f-droid/v/dev.obfusk.sokobang.svg)](https://f-droid.org/app/dev.obfusk.sokobang)
+-->
 
 ## Description
 
@@ -19,7 +25,12 @@ sokobang - sokoban puzzle w/ bigbang.coffee
 
 → https://obfusk.ch/sokobang/
 
-A sokoban puzzle -- with images and levels from
+<!--
+[<img src="badges/google-play.png" alt="Get it on Google Play" height="60">](https://play.google.com/store/apps/details?id=dev.obfusk.sokobang)
+[<img src="badges/fdroid.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/app/dev.obfusk.sokobang)
+-->
+
+Sokoban(g) is a sokoban puzzle -- with images and levels from
 [ksokoban](https://projects.kde.org/projects/playground/games/ksokoban/repository)
 -- written in coffeescript using the
 [bigbang.coffee](https://github.com/obfusk/bigbang.coffee) library.
