@@ -46,7 +46,14 @@
       return $('#data-and-buttons')[0].scrollIntoView(false);
     };
     get_lvl = function() {
-      return (location.hash.slice(1) || localStorage.getItem("level") || "3_0").split("_");
+      var h, j, len, ref, results, x;
+      ref = (/^\d+_\d+$/.test(h = location.hash.slice(1)) ? h : localStorage.getItem("level") || "3_0").split("_");
+      results = [];
+      for (j = 0, len = ref.length; j < len; j++) {
+        x = ref[j];
+        results.push(parseInt(x));
+      }
+      return results;
     };
     set_lvl = function() {
       return localStorage.setItem("level", location.hash = current.set + "_" + current.level);

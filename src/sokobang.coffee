@@ -2,7 +2,7 @@
 #
 #     File        : sokobang.coffee
 #     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-#     Date        : 2020-09-02
+#     Date        : 2020-09-03
 #
 #     Copyright   : Copyright (C) 2020  Felix C. Stegerman
 #     Licence     : AGPLv3+
@@ -82,7 +82,6 @@ S.update_world = update_world = (w, w_) ->
     for o in w2.objects
       w2.meta.objects[posn_str o] = o
   w2
-
 
 # --
 

@@ -6,4 +6,4 @@ app = Flask(__name__, static_folder = "public", static_url_path = "")
 def index():
   return app.send_static_file("index.html")
 
-app.run(port = 24235)
+app.run(host = "localhost", port = 24235)

@@ -2,7 +2,7 @@
 #
 #     File        : start.coffee
 #     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-#     Date        : 2020-09-02
+#     Date        : 2020-09-03
 #
 #     Copyright   : Copyright (C) 2020  Felix C. Stegerman
 #     Version     : v0.2.1
@@ -32,8 +32,8 @@ $ ->
     $('#data-and-buttons')[0].scrollIntoView false
 
   get_lvl = ->
-    (location.hash.slice(1) || localStorage.getItem("level") || "3_0")
-    .split "_"
+    parseInt x for x in (if /^\d+_\d+$/.test h = location.hash.slice 1
+    then h else localStorage.getItem("level") || "3_0").split "_"
   set_lvl = ->
     localStorage.setItem "level",
       location.hash = "#{current.set}_#{current.level}"
