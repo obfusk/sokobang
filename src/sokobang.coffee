@@ -2,7 +2,7 @@
 #
 #     File        : sokobang.coffee
 #     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-#     Date        : 2020-09-03
+#     Date        : 2020-09-08
 #
 #     Copyright   : Copyright (C) 2020  Felix C. Stegerman
 #     Licence     : AGPLv3+
@@ -101,8 +101,8 @@ S.move_man = move_man = (w, k) ->                               # {{{1
                                                                 # }}}1
 
 S.move_man_click = move_man_click = (w, x, y) ->
-  dx = x - w.opts.canvas.clientWidth  / 2
-  dy = y - w.opts.canvas.clientHeight / 2
+  [man_x, man_y]  = posn_to_canvas_xy_scaled w.man, w.opts
+  [dx, dy]        = [x - man_x, y - man_y]
   move_man w, if Math.abs(dx) > Math.abs(dy)
     if dx < 0 then 'left' else 'right'
   else
@@ -155,6 +155,11 @@ S.img_and_scene = img_and_scene = (posn, img, opts, scene) ->
 S.posn_to_canvas_xy = posn_to_canvas_xy = (posn, opts) ->
   [posn.x * opts.img_size + opts.img_size/2,
    posn.y * opts.img_size + opts.img_size/2]
+
+S.posn_to_canvas_xy_scaled = posn_to_canvas_xy_scaled = (posn, opts) ->
+  [x, y] = posn_to_canvas_xy posn, opts
+  [x * opts.canvas.clientWidth  / opts.canvas.width,
+   y * opts.canvas.clientHeight / opts.canvas.height]
 
 # --
 
