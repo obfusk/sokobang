@@ -1,0 +1,5 @@
+Sokoban(g) is a sokoban (Japanese "warehouse keeper") puzzle game.
+
+The objective of the game is to push all the red gems to the green goal squares (using as few moves and pushes as possible).
+
+Use the arrow buttons to move; press 'u' to undo the last move.
