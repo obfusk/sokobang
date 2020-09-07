@@ -2,7 +2,7 @@
 #
 #     File        : start.coffee
 #     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-#     Date        : 2020-09-03
+#     Date        : 2020-09-08
 #
 #     Copyright   : Copyright (C) 2020  Felix C. Stegerman
 #     Version     : v0.2.1
@@ -47,7 +47,7 @@ $ ->
   oops = -> _alert 'We apologise for the inconvenience...'
   opts = { canvas: $canvas[0], on_done, on_update }
 
-  for x in 'goal man man_goal object object_goal wall'.split(/\ +/)
+  for x in 'goal person person_goal object object_goal wall'.split(/\ +/)
     opts["#{x}_img"] = $("##{x}_img")[0]
 
   start = (level) ->

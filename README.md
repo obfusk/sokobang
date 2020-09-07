@@ -2,7 +2,7 @@
 
     File        : README.md
     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-    Date        : 2020-09-02
+    Date        : 2020-09-08
 
     Copyright   : Copyright (C) 2020  Felix C. Stegerman
     Version     : v0.2.1
@@ -60,5 +60,15 @@ To run the game, you will need bigbang.coffee; when using git, use
 ### Images & Levels
 
 See [`README.ksokoban`](README.ksokoban).
+
+### Person Image
+
+© Google Inc.
+
+[Apache 2.0](https://github.com/googlefonts/noto-emoji/blob/master/LICENSE)
+
+NB: `person.png` is an unmodified render of the original SVG;
+`person_goal.png` is a combination of `person.png` and `goal.png` (and
+thus licensed under AGPLv3+).
 
 <!-- vim: set tw=70 sw=2 sts=2 et fdm=marker : -->

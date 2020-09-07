@@ -77,7 +77,7 @@
       on_done: on_done,
       on_update: on_update
     };
-    ref = 'goal man man_goal object object_goal wall'.split(/\ +/);
+    ref = 'goal person person_goal object object_goal wall'.split(/\ +/);
     for (j = 0, len = ref.length; j < len; j++) {
       x = ref[j];
       opts[x + "_img"] = $("#" + x + "_img")[0];

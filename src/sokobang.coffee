@@ -5,6 +5,7 @@
 #     Date        : 2020-09-08
 #
 #     Copyright   : Copyright (C) 2020  Felix C. Stegerman
+#     Version     : v0.2.1
 #     Licence     : AGPLv3+
 #
 # <!-- }}}1 -->
@@ -40,9 +41,9 @@ S.start = start = (opts, level) ->                              # {{{1
   teardown = (c, hs, sv) -> $(c).off 'bb_quit', sv.h_quit
 
   bb_opts =
-    canvas: opts.canvas, world: w, on_key: move_man,
-    on_click: move_man_click, stop_when: goals_reached, to_draw: draw,
-    last_draw: render_end, on_stop: opts.on_done,
+    canvas: opts.canvas, world: w, on_key: move_person,
+    on_click: move_person_click, stop_when: goals_reached,
+    to_draw: draw, last_draw: render_end, on_stop: opts.on_done,
     on: { quit: on_quit }, setup: setup, teardown: teardown,
     # queue: 1, on_tick: true
 
@@ -53,26 +54,26 @@ S.start = start = (opts, level) ->                              # {{{1
 # --
 
 S.data_to_world = data_to_world = (data, opts) ->               # {{{1
-  objects = []; goals = []; walls = []; man = null
+  objects = []; goals = []; walls = []; person = null
   meta = objects: {}, goals: {}, walls: {}
   for row, i in data.data
     for cell, j in row
       posn = x: j, y: i
       switch cell
-        when '@' then man =         posn
+        when '@' then person =      posn
         when '#' then walls.push    posn
         when '$' then objects.push  posn
         when '.' then goals.push    posn
         when '*' then goals.push    posn; objects.push  posn
-        when '+' then goals.push    posn; man =         posn
+        when '+' then goals.push    posn; person =      posn
   for o in objects
     meta.objects[posn_str o] = o
   for g in goals
     meta.goals[posn_str g] = g
   for w in walls
     meta.walls[posn_str w] = w
-  { h: data.height, w: data.width, man, objects, goals, walls, meta, \
-    opts, prev: null, moves: 0, pushes: 0 }
+  { h: data.height, w: data.width, person, objects, goals, walls, \
+    meta, opts, prev: null, moves: 0, pushes: 0 }
                                                                 # }}}1
 
 S.update_world = update_world = (w, w_) ->
@@ -85,12 +86,12 @@ S.update_world = update_world = (w, w_) ->
 
 # --
 
-S.move_man = move_man = (w, k) ->                               # {{{1
+S.move_person = move_person = (w, k) ->                         # {{{1
   return w.prev || w if k == 'u'  # undo
   return w unless is_dir k
-  move_posn = move w.man, k
+  move_posn = move w.person, k
   return w if w.meta.walls[posn_str move_posn]
-  w_ = update_world w, man: move_posn, prev: w, moves: w.moves + 1
+  w_ = update_world w, person: move_posn, prev: w, moves: w.moves + 1
   return w_ unless w.meta.objects[posn_str move_posn]
   push_posn = move move_posn, k
   return w if w.meta.  walls[posn_str push_posn] ||
@@ -100,10 +101,10 @@ S.move_man = move_man = (w, k) ->                               # {{{1
   update_world w_, objects: objs_, pushes: w.pushes + 1
                                                                 # }}}1
 
-S.move_man_click = move_man_click = (w, x, y) ->
-  [man_x, man_y]  = posn_to_canvas_xy_scaled w.man, w.opts
-  [dx, dy]        = [x - man_x, y - man_y]
-  move_man w, if Math.abs(dx) > Math.abs(dy)
+S.move_person_click = move_person_click = (w, x, y) ->
+  [person_x, person_y]  = posn_to_canvas_xy_scaled w.person, w.opts
+  [dx, dy]              = [x - person_x, y - person_y]
+  move_person w, if Math.abs(dx) > Math.abs(dy)
     if dx < 0 then 'left' else 'right'
   else
     if dy < 0 then 'up' else 'down'
@@ -114,8 +115,9 @@ S.goals_reached = goals_reached = (w) ->
 # --
 
 S.render_world = render_world = (w) ->
-  place_man w, place_objects w, place_goals w, place_walls w, w.opts.bg_scene
-  # NB: place man over goals!
+  place_person w, place_objects w, place_goals w, place_walls w,
+    w.opts.bg_scene
+  # NB: place person over goals!
 
 S.render_end = render_end = (w) ->
   return render_world w if w.quit
@@ -125,12 +127,12 @@ S.render_end = render_end = (w) ->
 
 # --
 
-S.place_man = place_man = (w, scene) ->
-  img = if w.meta.goals[posn_str w.man]
-    w.opts.man_goal_img
+S.place_person = place_person = (w, scene) ->
+  img = if w.meta.goals[posn_str w.person]
+    w.opts.person_goal_img
   else
-    w.opts.man_img
-  img_and_scene w.man, img, w.opts, scene
+    w.opts.person_img
+  img_and_scene w.person, img, w.opts, scene
 
 S.place_objects = place_objects = (w, scene) ->
   [obj_goals,objs] = U.partition w.objects, (o) -> w.meta.goals[posn_str o]

@@ -24,6 +24,11 @@ DEPENDENCIES = dict(                                            # {{{1
   setuptools    = dict(url = "https://github.com/pypa/setuptools"),
   six           = dict(url = "https://github.com/benjaminp/six"),
   werkzeug      = dict(url = "https://github.com/pallets/werkzeug"),
+
+  noto_emoji = dict(
+    name  = "noto-emoji",
+    url   = "https://github.com/googlefonts/noto-emoji"
+  ),
 )                                                               # }}}1
 
 data  = dict(DEPS = DEPENDENCIES, now = time.time())
