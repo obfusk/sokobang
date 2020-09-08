@@ -1,3 +1,37 @@
-The online version of Sokoban(g) at https://sokobang.obfusk.dev does not collect or store any personal data other than through standard web server log files (containing IP addresses, requested URLs, timestamps, and user agents) used only for server monitoring.  The logs are anonymised and/or deleted after a reasonable amount of time.  The web server is located in the Netherlands.
+Sokoban(g) Privacy Policy
+=========================
 
-The offline android version of Sokoban(g) does not collect any personal data whatsoever.
+Website
+-------
+
+When you play Sokoban(g) online in your browser at https://sokobang.obfusk.dev:
+
+• The web server uses standard log files (containing IP addresses, requested URLs, referrers, timestamps, and user agent information).
+
+• The log files are only used for server monitoring, never shared with third parties, anonymised when possible, and deleted when no longer needed.
+
+• The web server is located in the Netherlands and hosted by Greenhost.
+
+• The last played level and a list of completed levels are stored in your browser.
+
+• No other personal data is collected or stored.
+
+
+Android App
+-----------
+
+• The Sokoban(g) android app does not collect any personal data.
+
+• The last played level and a list of completed levels are stored in the app.
+
+
+External Links
+--------------
+
+Sokoban(g) contains links to third-party sites like github.com, which are subject to their own privacy policies.
+
+
+Contact
+-------
+
+sokobang@obfusk.dev
