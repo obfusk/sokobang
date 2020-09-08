@@ -25,8 +25,8 @@ sokobang - sokoban puzzle w/ bigbang.coffee
 
 → https://sokobang.obfusk.dev
 
-<!--
 [<img src="badges/google-play.png" alt="Get it on Google Play" height="60">](https://play.google.com/store/apps/details?id=dev.obfusk.sokobang)
+<!--
 [<img src="badges/fdroid.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/app/dev.obfusk.sokobang)
 -->
 
@@ -34,6 +34,8 @@ Sokoban(g) is a sokoban puzzle -- with images and levels from
 [ksokoban](https://projects.kde.org/projects/playground/games/ksokoban/repository)
 -- written in coffeescript using the
 [bigbang.coffee](https://github.com/obfusk/bigbang.coffee) library.
+
+![screenshot](screenshot.png)
 
 ## Dependencies
 
