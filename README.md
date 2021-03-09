@@ -1,4 +1,4 @@
-<!-- {{{1 -->
+<!-- {{{1
 
     File        : README.md
     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
@@ -8,7 +8,7 @@
     Version     : v0.2.2
     License     : AGPLv3+
 
-<!-- }}}1 -->
+}}}1 -->
 
 [![GitHub Release](https://img.shields.io/github/release/obfusk/sokobang.svg?logo=github)](https://github.com/obfusk/sokobang/releases)
 [![F-Droid Version](https://img.shields.io/f-droid/v/dev.obfusk.sokobang.svg)](https://f-droid.org/app/dev.obfusk.sokobang)
