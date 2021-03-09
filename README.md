@@ -23,12 +23,11 @@ sokobang - sokoban puzzle w/ bigbang.coffee
 → https://sokobang.obfusk.dev
 
 [<img src="badges/fdroid.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/app/dev.obfusk.sokobang)
+[<img src="badges/google-play.png" alt="Get it on Google Play" height="60">](https://play.google.com/store/apps/details?id=dev.obfusk.sokobang)
 
 NB: sokobang is now available in the official F-Droid repository, but
 you can also get it via [**obfusk's f-droid
 repo**](https://obfusk.dev/fdroid/repo?fingerprint=2A21B7FFC93B878724B1991C05DAE113C72B93A556C193F49B5D3342884798B7).
-
-[<img src="badges/google-play.png" alt="Get it on Google Play" height="60">](https://play.google.com/store/apps/details?id=dev.obfusk.sokobang)
 
 Sokoban(g) is a sokoban puzzle -- with images and levels from
 [ksokoban](https://projects.kde.org/projects/playground/games/ksokoban/repository)
