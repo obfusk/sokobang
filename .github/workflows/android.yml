@@ -2,38 +2,107 @@ name: Android
 on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
+    container:
+      image: debian:${{ matrix.container }}
     strategy:
       matrix:
         target:
-        - debug-armeabi-v7a
-        - debug-arm64-v8a
         - release-armeabi-v7a
         - release-arm64-v8a
+        container:
+        - stretch
+        - buster
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8
-    - name: Install dependencies
+    - name: Install git etc.
       run: |
-        sudo make _android_setup_root
-        make _android_setup_user
-    - name: Cache ~/.buildozer
-      uses: actions/cache@v2
-      with:
-        path: ~/.buildozer
-        key: ${{ runner.os }}
+        apt-get update || apt-get update
+        apt-get upgrade -y
+        if ! grep -q stretch /etc/os-release; then
+          apt-get install -y usrmerge
+        fi
+        apt-get install -y git lsb-release
+      env:
+        DEBIAN_FRONTEND: noninteractive
+    - name: Setup user
+      run: |
+        adduser --disabled-password --gecos '' vagrant
+    - name: Clone repo
+      run: |
+        su - vagrant -c "
+          set -e
+          mkdir build
+          git init build/dev.obfusk.sokobang
+          cd build/dev.obfusk.sokobang
+          git remote add origin https://github.com/$GITHUB_REPOSITORY
+          git config --local gc.auto 0
+          git fetch --prune --progress --no-recurse-submodules origin \
+            +$GITHUB_SHA:refs/remotes/origin/${GITHUB_REF##*/}
+          git checkout --progress --force -B ${GITHUB_REF##*/} \
+            refs/remotes/origin/${GITHUB_REF##*/}
+          git log -1 --format=%H
+        "
+    - name: Install dependencies (1)
+      run: |
+        ~vagrant/build/dev.obfusk.sokobang/scripts/setup-root.sh
+    - name: Install python
+      run: |
+        if grep -q stretch /etc/os-release; then
+          git clone --depth 1 -b v3.7.10 https://github.com/python/cpython
+          cd cpython
+          ./configure --enable-loadable-sqlite-extensions
+          make -j`nproc`
+          make altinstall
+        fi
+      env:
+        DEBIAN_FRONTEND: noninteractive
+    - name: Install dependencies (2)
+      run: |
+        su - vagrant -c '
+          set -e && cd build/dev.obfusk.sokobang
+          if grep -q stretch /etc/os-release; then
+            python3.7 -mvenv ~/env
+            source ~/env/bin/activate
+            PIP_INSTALL="pip install" ./scripts/setup-user.sh
+          else
+            ./scripts/setup-user.sh
+          fi
+        '
+    - name: System info
+      run: |
+        su - vagrant -c '
+          set -e && cd build/dev.obfusk.sokobang
+          if grep -q stretch /etc/os-release; then
+            source ~/env/bin/activate
+          fi
+          uname -a && lsb_release -a
+          git --version && python3 --version
+          java -version && javac -version
+          id && pwd && echo "umask=$(umask)"
+        '
     - name: Build
-      run: make android-${{ matrix.target }}
+      run: |
+        su - vagrant -c '
+          set -e && cd build/dev.obfusk.sokobang
+          if grep -q stretch /etc/os-release; then
+            source ~/env/bin/activate
+          else
+            export PATH="$HOME/.local/bin:$PATH"
+          fi
+          make android-${{ matrix.target }}
+        '
+        mkdir bin
+        mv ~vagrant/build/dev.obfusk.sokobang/bin/*.apk bin/
+    - name: SHASUMS
+      run: |
+        sha1sum   bin/*.apk
+        sha256sum bin/*.apk
+        sha512sum bin/*.apk
     - name: Version
       run: touch VERSION_"$(git describe --always)"
     - uses: actions/upload-artifact@v2
       with:
-        name: APK
+        name: sokobang-${{ matrix.container }}-APK
         path: |
-          bin/*.apk
           VERSION_*
+          bin/*.apk

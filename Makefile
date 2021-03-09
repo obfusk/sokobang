@@ -2,6 +2,14 @@ SHELL       := /bin/bash
 BUILDOZER   ?= buildozer
 PIP_INSTALL ?= pip install
 
+# for reproducible builds
+export LC_ALL             := C
+export TZ                 := UTC
+export SOURCE_DATE_EPOCH  := $(shell git log -1 --pretty=%ct)
+export PYTHONHASHSEED     := $(SOURCE_DATE_EPOCH)
+export BUILD_DATE         := $(shell LC_ALL=C TZ=UTC date +'%b %e %Y' -d @$(SOURCE_DATE_EPOCH))
+export BUILD_TIME         := $(shell LC_ALL=C TZ=UTC date +'%H:%M:%S' -d @$(SOURCE_DATE_EPOCH))
+
 .PHONY: all spec spec_verbose spec_less docs clean
 
 all: public/index.html
@@ -32,39 +40,41 @@ NUMERIC := $(shell grep -oP 'numeric_version *= *\K\d*' buildozer.spec)
 android-debug: android-debug-armeabi-v7a android-debug-arm64-v8a
 
 android-clean:
+	mkdir -p ../_sokobang_buildozer_
+	APP_ANDROID_ARCH=armeabi-v7a buildozer android clean
 	buildozer android clean
 	rm -fr bin/
 
 .PHONY: android-debug-armeabi-v7a android-debug-arm64-v8a
 .PHONY: android-release-armeabi-v7a android-release-arm64-v8a
+.PHONY: android-debug android-release
+
+android-debug: android-debug-armeabi-v7a android-debug-arm64-v8a
 
 android-debug-armeabi-v7a:
 	APP_ANDROID_ARCH=armeabi-v7a \
 	APP_ANDROID_NUMERIC_VERSION=$$(( $(NUMERIC) - 1 )) \
-	buildozer android debug
+	./scripts/buildozer.sh debug
 
 android-debug-arm64-v8a:
 	APP_ANDROID_NUMERIC_VERSION=$(NUMERIC) \
-	buildozer android debug
+	./scripts/buildozer.sh debug
+
+android-release: android-release-armeabi-v7a android-release-arm64-v8a
 
 android-release-armeabi-v7a:
 	APP_ANDROID_ARCH=armeabi-v7a \
 	APP_ANDROID_NUMERIC_VERSION=$$(( $(NUMERIC) - 1 )) \
-	buildozer android release
+	./scripts/buildozer.sh release
 
 android-release-arm64-v8a:
 	APP_ANDROID_NUMERIC_VERSION=$(NUMERIC) \
-	buildozer android release
+	./scripts/buildozer.sh release
 
 .PHONY: _android_setup_root _android_setup_user
 
 _android_setup_root:
-	apt-get install -y build-essential git
-	apt-get install -y openjdk-11-jdk-headless
-	apt-get install -y zlib1g-dev zip unzip pkg-config libffi-dev
-	apt-get install -y libltdl-dev
-	apt-get install -y lld
+	./scripts/setup-root.sh
 
 _android_setup_user:
-	$(PIP_INSTALL) --upgrade $(BUILDOZER)
-	$(PIP_INSTALL) --upgrade Cython==0.29.19 virtualenv
+	./scripts/setup-user.sh

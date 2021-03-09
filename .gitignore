@@ -1,8 +1,8 @@
 *~
 *.swp
 
-.buildozer
 /bin
+/tmp
 
 /doc
 /node_modules
