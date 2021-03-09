@@ -1,6 +1,4 @@
-SHELL       := /bin/bash
-BUILDOZER   ?= buildozer
-PIP_INSTALL ?= pip install
+SHELL := /bin/bash
 
 # for reproducible builds
 export LC_ALL             := C

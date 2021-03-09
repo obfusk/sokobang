@@ -60,10 +60,10 @@ ssh "$remote" '
   if grep -q stretch /etc/os-release; then
     [ -e ~/env ] || python3.7 -mvenv ~/env
     source ~/env/bin/activate
-    PIP_INSTALL="pip install" ./scripts/setup-user.sh
+    PIP_INSTALL="pip3 install" ./scripts/setup-user.sh
   else
     export PATH="$HOME/.local/bin:$PATH"
-    ./scripts/setup-user.sh
+    PIP_INSTALL="pip3 install --user" ./scripts/setup-user.sh
   fi
   for target in '"$*"'; do
     if [ "$target" = clean ]; then
