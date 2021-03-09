@@ -2,22 +2,19 @@
 
     File        : README.md
     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-    Date        : 2020-11-11
+    Date        : 2021-03-09
 
-    Copyright   : Copyright (C) 2020  Felix C. Stegerman
+    Copyright   : Copyright (C) 2021  Felix C. Stegerman
     Version     : v0.2.2
     License     : AGPLv3+
 
 <!-- }}}1 -->
 
 [![GitHub Release](https://img.shields.io/github/release/obfusk/sokobang.svg?logo=github)](https://github.com/obfusk/sokobang/releases)
+[![F-Droid Version](https://img.shields.io/f-droid/v/dev.obfusk.sokobang.svg)](https://f-droid.org/app/dev.obfusk.sokobang)
 [![Android Build](https://github.com/obfusk/sokobang/workflows/Android/badge.svg)](https://github.com/obfusk/sokobang/actions?query=workflow%3AAndroid)
 [![AGPLv3+](https://img.shields.io/badge/license-AGPLv3+-blue.svg)](https://www.gnu.org/licenses/agpl-3.0.html)
 [![Sponsor](https://img.shields.io/badge/%E2%99%A5-support-violet.svg)](https://ko-fi.com/obfusk)
-
-<!--
-[![F-Droid Version](https://img.shields.io/f-droid/v/dev.obfusk.sokobang.svg)](https://f-droid.org/app/dev.obfusk.sokobang)
--->
 
 ## Description
 
@@ -27,13 +24,11 @@ sokobang - sokoban puzzle w/ bigbang.coffee
 
 [<img src="badges/google-play.png" alt="Get it on Google Play" height="60">](https://play.google.com/store/apps/details?id=dev.obfusk.sokobang)
 
-NB: unfortunately, sokobang is not (yet) available in the official
-F-Droid repository, but you can get it via [**obfusk's f-droid
+[<img src="badges/fdroid.png" alt="Get it on F-Droid" height="60">](https://f-droid.org/app/dev.obfusk.sokobang)
+
+NB: sokobang is now available in the official F-Droid repository, but
+you can also get it via [**obfusk's f-droid
 repo**](https://obfusk.dev/fdroid/repo?fingerprint=2A21B7FFC93B878724B1991C05DAE113C72B93A556C193F49B5D3342884798B7).
-
-[<img src="badges/fdroid.png" alt="Get it on F-Droid" height="60">]()
-
-<!-- [](https://f-droid.org/app/dev.obfusk.sokobang) -->
 
 Sokoban(g) is a sokoban puzzle -- with images and levels from
 [ksokoban](https://projects.kde.org/projects/playground/games/ksokoban/repository)
