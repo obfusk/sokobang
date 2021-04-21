@@ -9,7 +9,7 @@
 #   scripts/_build.sh vagrant@HOST clean {debug,release}-arm64-v8a
 #
 # NB:
-#   assumes setup-root.sh packages installed
+#   assumes setup-{root,python,sqlite}.sh has been run
 #
 ######################################################################
 
@@ -18,12 +18,7 @@ test "$#" -ge 2
 
 remote="$1"; shift
 branch="$( git branch --show-current )"
-
-android_dir=.buildozer/android/platform
-android_repo=https://dl.google.com/android/repository
-ndk_dir=android-ndk-r22
-ndk="$ndk_dir-linux-x86_64.zip"
-ndk_sha512=0bef6fdd80f7ceb8a9e1390ff8cfbbe0342d821a692cf26c1928e44ba3164284d8dbfc6669f16b2044a6a44b5bbd335d974db17d7893feecdd5a93770c78550f
+ndk=r22b
 
 # test
 if [ "$( ssh "$remote" 'echo OK' || true )" != OK ]; then
@@ -32,15 +27,12 @@ if [ "$( ssh "$remote" 'echo OK' || true )" != OK ]; then
 fi
 
 # cache ndk
-if ! ssh "$remote" "test -d $android_dir/$ndk_dir"; then
-  if ! test -e tmp/"$ndk"; then
-    mkdir -p tmp
-    wget -O tmp/"$ndk" -- "$android_repo/$ndk"
-    sha512sum -c <<< "$ndk_sha512  tmp/$ndk"
+if ! ssh "$remote" "test -d android-ndk/$ndk"; then
+  if test -e tmp/android-ndk-$ndk-linux-x86_64.zip; then
+    scp tmp/android-ndk-$ndk-linux-x86_64.zip "$remote:"
   fi
-  ssh "$remote" "mkdir -p $android_dir"
-  scp tmp/"$ndk" "$remote:$android_dir/"
-  ssh "$remote" "cd $android_dir && unzip $ndk"
+  scp scripts/setup-ndk.sh "$remote:"
+  ssh "$remote" ./setup-ndk.sh
 fi
 
 # push
@@ -57,6 +49,7 @@ ssh "$remote" '
 # setup & build
 ssh "$remote" '
   set -e && cd build/dev.obfusk.sokobang
+  export PATH=/usr/local/bin:/bin:/usr/bin
   if grep -q stretch /etc/os-release; then
     [ -e ~/env ] || python3.7 -mvenv ~/env
     source ~/env/bin/activate
@@ -81,5 +74,5 @@ ssh "$remote" '
 '
 
 # copy APKs
-mkdir -p tmp/_build
-scp "$remote:build/dev.obfusk.sokobang/bin/*.apk" tmp/_build/
+mkdir -p tmp/_build/"$remote"
+scp "$remote:build/dev.obfusk.sokobang/bin/*.apk" tmp/_build/"$remote"/

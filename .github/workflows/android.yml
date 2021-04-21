@@ -11,17 +11,21 @@ jobs:
         - release-armeabi-v7a
         - release-arm64-v8a
         container:
-        - stretch
+      # - stretch
         - buster
     steps:
     - name: Install git etc.
       run: |
+        if grep -q stretch /etc/os-release; then
+          echo 'deb http://deb.debian.org/debian stretch-backports main' \
+            > /etc/apt/sources.list.d/stretch-backports.list
+        fi
         apt-get update || apt-get update
         apt-get upgrade -y
         if ! grep -q stretch /etc/os-release; then
           apt-get install -y usrmerge
         fi
-        apt-get install -y git lsb-release
+        apt-get install -y git lsb-release wget
       env:
         DEBIAN_FRONTEND: noninteractive
     - name: Setup user
@@ -45,21 +49,16 @@ jobs:
     - name: Install dependencies (1)
       run: |
         ~vagrant/build/dev.obfusk.sokobang/scripts/setup-root.sh
-    - name: Install python
-      run: |
         if grep -q stretch /etc/os-release; then
-          git clone --depth 1 -b v3.7.10 https://github.com/python/cpython
-          cd cpython
-          ./configure --enable-loadable-sqlite-extensions
-          make -j`nproc`
-          make altinstall
+          ~vagrant/build/dev.obfusk.sokobang/scripts/setup-python.sh
         fi
-      env:
-        DEBIAN_FRONTEND: noninteractive
+        ~vagrant/build/dev.obfusk.sokobang/scripts/setup-sqlite.sh
     - name: Install dependencies (2)
       run: |
         su - vagrant -c '
-          set -e && cd build/dev.obfusk.sokobang
+          set -e
+          ~/build/dev.obfusk.sokobang/scripts/setup-ndk.sh
+          cd build/dev.obfusk.sokobang
           if grep -q stretch /etc/os-release; then
             python3.7 -mvenv ~/env
             source ~/env/bin/activate
@@ -84,6 +83,7 @@ jobs:
       run: |
         su - vagrant -c '
           set -e && cd build/dev.obfusk.sokobang
+          export PATH=/usr/local/bin:/bin:/usr/bin
           if grep -q stretch /etc/os-release; then
             source ~/env/bin/activate
           else
