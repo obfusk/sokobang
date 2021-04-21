@@ -2,10 +2,10 @@
 
     File        : README.md
     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
-    Date        : 2021-03-09
+    Date        : 2021-04-21
 
     Copyright   : Copyright (C) 2021  Felix C. Stegerman
-    Version     : v0.2.3
+    Version     : v0.2.4
     License     : AGPLv3+
 
 }}}1 -->
