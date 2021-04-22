@@ -4,7 +4,7 @@ package.name = sokobang
 package.domain = dev.obfusk
 source.dir = .
 source.exclude_dirs = badges,bin,deps,fastlane,icon,patches,p4a-recipes,scripts,spec,src,templates
-source.exclude_patterns = makefile,p4a-commit,screenshot.png,static.json
+source.exclude_patterns = buildozer.spec,local.properties,makefile,p4a-commit,screenshot.png,static.json
 requirements =
   click==7.1.2,flask==1.1.2,openssl,sqlite3,
   hostpython3==3.9.4,python3==3.9.4,
