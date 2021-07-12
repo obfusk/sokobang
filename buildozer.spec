@@ -7,11 +7,11 @@ source.exclude_dirs = badges,bin,deps,fastlane,icon,patches,p4a-recipes,scripts,
 source.exclude_patterns = buildozer.spec,local.properties,makefile,p4a-commit,screenshot.png,static.json
 requirements =
   click==8.0.1,flask==2.0.1,openssl,sqlite3,
-  hostpython3==3.9.5,python3==3.9.5,
+  hostpython3==3.9.6,python3==3.9.6,
   android,genericndkbuild,
   itsdangerous==2.0.1,jinja2==3.0.1,markupsafe==2.0.1,werkzeug==2.0.1,
-  libffi==v3.3,pyjnius==1.3.0,
-  setuptools==57.0.0,six==1.16.0
+  libffi==v3.4.2,pyjnius==1.3.0,
+  setuptools==57.1.0,six==1.16.0
 icon.filename = %(source.dir)s/icon.png
 orientation = portrait
 fullscreen = 0
