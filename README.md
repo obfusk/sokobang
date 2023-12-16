@@ -1,10 +1,10 @@
 <!-- {{{1
 
     File        : README.md
-    Maintainer  : Felix C. Stegerman <flx@obfusk.net>
+    Maintainer  : FC Stegerman <flx@obfusk.net>
     Date        : 2021-07-12
 
-    Copyright   : Copyright (C) 2021  Felix C. Stegerman
+    Copyright   : Copyright (C) 2021  FC Stegerman
     Version     : v0.2.5
     License     : AGPLv3+
 
@@ -50,7 +50,7 @@ To run the game, you will need bigbang.coffee; when using git, use
 
 ### Code
 
-© Felix C. Stegerman
+© FC Stegerman
 
 [![AGPLv3+](https://www.gnu.org/graphics/agplv3-155x51.png)](https://www.gnu.org/licenses/agpl-3.0.html)
 

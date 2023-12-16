@@ -1,10 +1,10 @@
 # <!-- {{{1 -->
 #
 #     File        : start.coffee
-#     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
+#     Maintainer  : FC Stegerman <flx@obfusk.net>
 #     Date        : 2020-09-08
 #
-#     Copyright   : Copyright (C) 2020  Felix C. Stegerman
+#     Copyright   : Copyright (C) 2020  FC Stegerman
 #     Version     : v0.2.1
 #     Licence     : AGPLv3+
 #

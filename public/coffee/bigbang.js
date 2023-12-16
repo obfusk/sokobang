@@ -4,10 +4,10 @@
  * {{{1 -->
  *
  *     File        : bigbang.coffee
- *     Maintainer  : Felix C. Stegerman <flx@obfusk.net>
+ *     Maintainer  : FC Stegerman <flx@obfusk.net>
  *     Date        : 2020-09-02
  *
- *     Copyright   : Copyright (C) 2020  Felix C. Stegerman
+ *     Copyright   : Copyright (C) 2020  FC Stegerman
  *     Licence     : LGPLv3+
  *     Version     : v0.2.1
  *
